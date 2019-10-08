@@ -1,0 +1,1 @@
+web: scrapy crawl RSS
