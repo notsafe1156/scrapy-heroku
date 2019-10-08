@@ -140,7 +140,7 @@ class RSSpider(scrapy.Spider):
             rss['id'] = 'yu'
             rss['source'] = 'yumingui'
             if get_info(item, rss, id):
-                print('already exist')
+                print(rss['id'], ' already exist')
                 continue
             time = item.xpath('pubDate/text()').extract_first().split(' ')
             date = [time[3], map_month(time[2]), time[1]]
@@ -168,7 +168,7 @@ class RSSpider(scrapy.Spider):
             rss['id'] = 'c'
             rss['source'] = 'Commatravel'
             if get_info(item, rss, id):
-                print('already exist')
+                print(rss['id'], ' already exist')
                 continue
             time = item.xpath('pubDate/text()').extract_first().split(' ')
             date = [time[3], map_month(time[2]), time[1]]
@@ -199,7 +199,7 @@ class RSSpider(scrapy.Spider):
             rss['id'] = 'whk'
             rss['source'] = 'weekendhk'
             if get_info(item, rss, id):
-                print('already exist')
+                print(rss['id'], ' already exist')
                 continue
             time = item.xpath('pubDate/text()').extract_first().split(' ')
             date = [time[3], map_month(time[2]), time[1]]
@@ -228,7 +228,7 @@ class RSSpider(scrapy.Spider):
             rss['id'] = 'it'
             rss['source'] = 'itravelblog'
             if get_info(item, rss, id):
-                print('already exist')
+                print(rss['id'], ' already exist')
                 continue
             time = item.xpath('pubDate/text()').extract_first().split(' ')
             date = [time[3], map_month(time[2]), time[1]]
@@ -258,7 +258,7 @@ class RSSpider(scrapy.Spider):
             rss['id'] = 'v'
             rss['source'] = 'viablog'
             if get_info(item, rss, id):
-                print('already exist')
+                print(rss['id'], ' already exist')
                 continue
             time = item.xpath('pubDate/text()').extract_first()
             date = time[0:4], time[5:7], time[8:10]
