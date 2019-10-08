@@ -7,8 +7,12 @@ from scrapy import FormRequest
 
 def get_info(item, rss, id):
     # 　判斷此ID 有無在DataBase，有的話就跳過
-    if rss['id'] + item.xpath('guid/text()').extract_first().split('=')[-1] in id:
-        print(item.xpath('title/text()').extract_first())
+    rss['id'] = str(uuid.uuid3(uuid.NAMESPACE_DNS, rss['id'] + item.xpath('guid/text()').extract_first().split('=')[-1]))
+    if rss['id'] in id:
+        # print('---------------')
+        # print(item.xpath('title/text()').extract_first())
+        # print('already exist ')
+        # print('================')
         return True
     rss['link'] = item.xpath('link/text()').extract_first()
     rss['title'] = item.xpath('title/text()').extract_first()
@@ -16,7 +20,6 @@ def get_info(item, rss, id):
     rss['category'] = []
     rss['id'] += item.xpath('guid/text()').extract_first().split('=')[-1]
     #   ID轉為UUID
-    rss['id'] = str(uuid.uuid3(uuid.NAMESPACE_DNS, rss['id']))
     for category in categories:
         rss['category'].append(category)
     print(rss['link'])
@@ -98,7 +101,6 @@ class RSSpider(scrapy.Spider):
         id = []
         for i in spiders_id:
             id.append(i[0])
-
         # yield scrapy.Request('https://api2.sstrm.net/util/api/dummyAPI', self.get_tagbypost)
 
         yield scrapy.Request('http://feeds.feedburner.com/yuminghui', self.parse_yuminghui, meta={'id': id})
